@@ -1,0 +1,78 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+        vector<vector<int>> ans( m , vector<int> (n)) ;
+        //auto temp = head;
+        int row = m , col =n , top = 0 , down = m-1 , left = 0 , right = n-1 , dv = 0 ;
+        //INPUT VALUES
+        int k=0;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                ans[i][j] = k++;
+            }cout<<endl;
+        }
+        
+        while( (top<=down) && (left<=right) ){
+         //TRAVERSING LEFT TO RIGHT
+        if(dv==0){
+            for(int i=left;i<=right;i++){
+                //cout<<ans[top][i]<<"  ";
+                if(head!=NULL){
+                    ans[top][i] = head->val;
+                    head = head->next;}
+                else ans[top][i] = -1;
+                }top +=1;
+            }
+         //TRAVERSING TOP TO DOWN
+        if(dv==1){
+            for(int i=top;i<=down;i++){
+                //cout<<ans[i][right]<<"  ";
+                if(head!=NULL){
+                    ans[i][right] = head->val;
+                    head = head->next;}
+                else ans[i][right] = -1;
+            }right -= 1;
+        }
+        //TRAVERSING RIGHT TO LEFT
+        if(dv==2){
+            for(int i=right;i>=left;i--){
+                //cout<<ans[down][i]<<"  ";
+                if(head!=NULL) {
+                    ans[down][i] = head->val;
+                    head = head->next;}
+                else ans[down][i] = -1;
+                }down -= 1;
+            }
+        //TRAVERSING DOWN TO TOP
+        if(dv==3){
+            for(int i=down;i<=top;i++){
+                //cout<<ans[i][left]<<"  ";
+                if(head!=NULL) {
+                    ans[i][left] = head->val;
+                    head = head->next;}
+                else ans[i][left] = -1;
+                }left += 1;
+            }
+            
+        dv = (dv+1)%4;
+        }
+        // cout<<endl;
+        // for(int i=0;i<row;i++){
+        //     for(int j=0;j<col;j++){
+        //         cout<<ans[i][j]<<"               ";
+        //     }cout<<endl;
+        // }
+        //cout<<row<<"  "<<col;
+        return ans;
+    }    
+};

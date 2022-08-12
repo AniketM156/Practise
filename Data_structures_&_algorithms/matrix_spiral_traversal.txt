@@ -1,0 +1,39 @@
+while( (top<=down) && (left<=right) ){
+         //TRAVERSING LEFT TO RIGHT
+        if(dv==0){
+            for(int i=left;i<=right;i++){
+                //cout<<ans[top][i]<<"  ";
+                if(temp!=NULL){
+                    ans[top][i] = temp->val;
+                    }
+                else{
+                    ans[top][i] = -1;
+                }
+                temp = temp->next;
+                }
+            top +=1;
+            }
+         //TRAVERSING TOP TO DOWN
+        if(dv==1){
+            for(int i=top;i<=down;i++){
+                cout<<ans[i][right]<<"  ";
+                }
+            right -= 1;
+            }
+        //TRAVERSING RIGHT TO LEFT
+        if(dv==2){
+            for(int i=right;i>=left;i--){
+                cout<<ans[down][i]<<"  ";
+                }
+            down -= 1;
+            }
+        //TRAVERSING DOWN TO TOP
+        if(dv==3){
+            for(int i=down;i<=top;i++){
+                cout<<ans[i][left]<<"  ";
+                }
+            left += 1;
+            }
+        dv = (dv+1)%4;
+
+        }
